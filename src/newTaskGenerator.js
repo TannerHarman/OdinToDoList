@@ -1,3 +1,8 @@
-const newTask = 'New Task';
+function newTask(task, description) {
+  return {
+    task,
+    description,
+  };
+}
 
 export default newTask;
