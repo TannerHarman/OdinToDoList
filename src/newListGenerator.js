@@ -1,6 +1,6 @@
-function newList(nameInput = 't') {
+function newList(nameInput = '') {
   let listName = nameInput;
-  let tasks = [];
+  const tasks = [];
 
   const getName = () => listName;
 
@@ -10,14 +10,14 @@ function newList(nameInput = 't') {
     listName = newName;
   };
 
-  const addtasks = taskList => {
-    tasks = taskList;
+  const addTasks = taskList => {
+    tasks.push(taskList);
   };
 
   return {
     getName,
     getTasks,
-    addtasks,
+    addTasks,
     setName,
   };
 }

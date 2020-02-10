@@ -86,6 +86,66 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/domFunctions/addListToSidebar.js":
+/*!**********************************************!*\
+  !*** ./src/domFunctions/addListToSidebar.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _templateFunctions_sideBarListTemplate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../templateFunctions/sideBarListTemplate */ \"./src/templateFunctions/sideBarListTemplate.js\");\n/* harmony import */ var _mainDisplayController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mainDisplayController */ \"./src/domFunctions/mainDisplayController.js\");\n\n\n\nfunction addListToSidebar(list) {\n  const createList = document.querySelector('#create-list');\n  const listNameInput = document.querySelector('#list-name');\n\n  createList.addEventListener('click', () => {\n    const lists = document.querySelector('#lists');\n    list.setName(listNameInput.value);\n    lists.innerHTML += Object(_templateFunctions_sideBarListTemplate__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(list);\n\n    Object(_mainDisplayController__WEBPACK_IMPORTED_MODULE_1__[\"default\"])('');\n  });\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (addListToSidebar);\n\n\n//# sourceURL=webpack:///./src/domFunctions/addListToSidebar.js?");
+
+/***/ }),
+
+/***/ "./src/domFunctions/addTask.js":
+/*!*************************************!*\
+  !*** ./src/domFunctions/addTask.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _templateFunctions_taskListTemplate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../templateFunctions/taskListTemplate */ \"./src/templateFunctions/taskListTemplate.js\");\n\n\nfunction addTask(list, taskGenerator) {\n  const newTaskButton = document.querySelector('#add-task');\n  const tasks = document.querySelector('#tasks');\n\n  newTaskButton.addEventListener('click', () => {\n    const taskName = document.querySelector('#task-name');\n    const taskDescription = document.querySelector('#task-name');\n    const newTask = taskGenerator(taskName.value, taskDescription.value);\n\n    list.addTasks(newTask);\n    tasks.innerHTML += Object(_templateFunctions_taskListTemplate__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(newTask);\n\n    console.log(list.getTasks());\n  });\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (addTask);\n\n\n//# sourceURL=webpack:///./src/domFunctions/addTask.js?");
+
+/***/ }),
+
+/***/ "./src/domFunctions/cancelList.js":
+/*!****************************************!*\
+  !*** ./src/domFunctions/cancelList.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _mainDisplayController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mainDisplayController */ \"./src/domFunctions/mainDisplayController.js\");\n\n\nfunction cancelList() {\n  const cancelButton = document.querySelector('#cancel-list');\n\n  cancelButton.addEventListener('click', () => {\n    Object(_mainDisplayController__WEBPACK_IMPORTED_MODULE_0__[\"default\"])('');\n  });\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (cancelList);\n\n\n//# sourceURL=webpack:///./src/domFunctions/cancelList.js?");
+
+/***/ }),
+
+/***/ "./src/domFunctions/mainDisplayController.js":
+/*!***************************************************!*\
+  !*** ./src/domFunctions/mainDisplayController.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nfunction mainDisplayController(content) {\n  const mainDisplay = document.querySelector('main');\n\n  mainDisplay.innerHTML = content;\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (mainDisplayController);\n\n\n//# sourceURL=webpack:///./src/domFunctions/mainDisplayController.js?");
+
+/***/ }),
+
+/***/ "./src/domFunctions/newList.js":
+/*!*************************************!*\
+  !*** ./src/domFunctions/newList.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _templateFunctions_newListForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../templateFunctions/newListForm */ \"./src/templateFunctions/newListForm.js\");\n/* harmony import */ var _cancelList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cancelList */ \"./src/domFunctions/cancelList.js\");\n/* harmony import */ var _addListToSidebar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./addListToSidebar */ \"./src/domFunctions/addListToSidebar.js\");\n/* harmony import */ var _addTask__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./addTask */ \"./src/domFunctions/addTask.js\");\n/* harmony import */ var _mainDisplayController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./mainDisplayController */ \"./src/domFunctions/mainDisplayController.js\");\n\n\n\n\n\n\nfunction newList(listGenerator, taskGenerator) {\n  const newList = document.querySelector('#new-list');\n\n  newList.addEventListener('click', () => {\n    const list = Object.seal(listGenerator());\n    Object(_mainDisplayController__WEBPACK_IMPORTED_MODULE_4__[\"default\"])(_templateFunctions_newListForm__WEBPACK_IMPORTED_MODULE_0__[\"default\"]);\n\n    Object(_addListToSidebar__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(list);\n    Object(_cancelList__WEBPACK_IMPORTED_MODULE_1__[\"default\"])();\n    Object(_addTask__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(list, taskGenerator);\n  });\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (newList);\n\n\n//# sourceURL=webpack:///./src/domFunctions/newList.js?");
+
+/***/ }),
+
 /***/ "./src/gui.js":
 /*!********************!*\
   !*** ./src/gui.js ***!
@@ -94,7 +154,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"guiModule\", function() { return guiModule; });\n/* harmony import */ var _newListForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./newListForm */ \"./src/newListForm.js\");\n/* harmony import */ var _sideBarListTemplate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sideBarListTemplate */ \"./src/sideBarListTemplate.js\");\n\n\n\nconst guiModule = function(listGenerator, taskGenerator) {\n  const newList = document.querySelector('#new-list');\n  const mainDisplay = document.querySelector('main');\n\n  newList.addEventListener('click', () => {\n    const list = Object.seal(listGenerator());\n    mainDisplay.innerHTML = _newListForm__WEBPACK_IMPORTED_MODULE_0__[\"default\"];\n\n    const createList = document.querySelector('#create-list');\n    const cancelList = document.querySelector('#cancel-list');\n    const listNameInput = document.querySelector('#list-name');\n\n    createList.addEventListener('click', () => {\n      const lists = document.querySelector('#lists');\n      list.setName(listNameInput.value);\n      lists.innerHTML += Object(_sideBarListTemplate__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(list);\n\n      mainDisplay.innerHTML = '';\n    });\n\n    cancelList.addEventListener('click', () => {\n      mainDisplay.innerHTML = '';\n    });\n  });\n};\n\n\n\n\n//# sourceURL=webpack:///./src/gui.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"guiModule\", function() { return guiModule; });\n/* harmony import */ var _domFunctions_newList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./domFunctions/newList */ \"./src/domFunctions/newList.js\");\n\n\nconst guiModule = function(listGenerator, taskGenerator) {\n  Object(_domFunctions_newList__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(listGenerator, taskGenerator);\n};\n\n\n\n\n//# sourceURL=webpack:///./src/gui.js?");
 
 /***/ }),
 
@@ -110,18 +170,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _new
 
 /***/ }),
 
-/***/ "./src/newListForm.js":
-/*!****************************!*\
-  !*** ./src/newListForm.js ***!
-  \****************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _newTaskTemplate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./newTaskTemplate */ \"./src/newTaskTemplate.js\");\n\n\nconst listForm = /* template */ `\n  <h4>New List</h4>\n\n  <div>\n    <label for=\"list-name\">Name</label>\n    <input id='list-name' type=\"text\" name='list-name'>\n  </div>\n\n  <div>\n    ${_newTaskTemplate__WEBPACK_IMPORTED_MODULE_0__[\"default\"]}\n  </div>\n\n  <button id='create-list'>Save List</button>\n  <button id='cancel-list'>Cancel</button>\n`;\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (listForm);\n\n\n//# sourceURL=webpack:///./src/newListForm.js?");
-
-/***/ }),
-
 /***/ "./src/newListGenerator.js":
 /*!*********************************!*\
   !*** ./src/newListGenerator.js ***!
@@ -130,7 +178,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _new
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nfunction newList(nameInput = 't') {\n  let listName = nameInput;\n  let tasks = [];\n\n  const getName = () => listName;\n\n  const getTasks = () => tasks;\n\n  const setName = newName => {\n    listName = newName;\n  };\n\n  const addtasks = taskList => {\n    tasks = taskList;\n  };\n\n  return {\n    getName,\n    getTasks,\n    addtasks,\n    setName,\n  };\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (newList);\n\n\n//# sourceURL=webpack:///./src/newListGenerator.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nfunction newList(nameInput = '') {\n  let listName = nameInput;\n  const tasks = [];\n\n  const getName = () => listName;\n\n  const getTasks = () => tasks;\n\n  const setName = newName => {\n    listName = newName;\n  };\n\n  const addTasks = taskList => {\n    tasks.push(taskList);\n  };\n\n  return {\n    getName,\n    getTasks,\n    addTasks,\n    setName,\n  };\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (newList);\n\n\n//# sourceURL=webpack:///./src/newListGenerator.js?");
 
 /***/ }),
 
@@ -142,31 +190,55 @@ eval("__webpack_require__.r(__webpack_exports__);\nfunction newList(nameInput = 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nfunction newTask(task, description) {\n  return {\n    task,\n    description,\n  };\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (newTask);\n\n\n//# sourceURL=webpack:///./src/newTaskGenerator.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nfunction newTask(name, description) {\n  return {\n    name,\n    description,\n  };\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (newTask);\n\n\n//# sourceURL=webpack:///./src/newTaskGenerator.js?");
 
 /***/ }),
 
-/***/ "./src/newTaskTemplate.js":
-/*!********************************!*\
-  !*** ./src/newTaskTemplate.js ***!
-  \********************************/
+/***/ "./src/templateFunctions/newListForm.js":
+/*!**********************************************!*\
+  !*** ./src/templateFunctions/newListForm.js ***!
+  \**********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nconst taskForm = /* template */ `\n  <div>\n    <label for=\"task-name\">Task</label>\n    <input id='task-name' type=\"text\" name='task-name'>\n  </div>\n\n  <div>\n    <label for=\"task-description\">Description</label>\n    <input id='task-description' type=\"text\" name='task-description'>\n  </div>\n\n  <button id='create-list'>Add Task</button>\n`;\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (taskForm);\n\n\n//# sourceURL=webpack:///./src/newTaskTemplate.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _newTaskTemplate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./newTaskTemplate */ \"./src/templateFunctions/newTaskTemplate.js\");\n\n\nconst listForm = /* template */ `\n  <h4>New List</h4>\n\n  <div>\n    <label for=\"list-name\">Name</label>\n    <input id='list-name' type=\"text\" name='list-name'>\n  </div>\n\n  <div id='tasks'></div>\n\n  <div>\n    ${_newTaskTemplate__WEBPACK_IMPORTED_MODULE_0__[\"default\"]}\n  </div>\n\n\n  <button id='create-list'>Save List</button>\n  <button id='cancel-list'>Cancel</button>\n`;\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (listForm);\n\n\n//# sourceURL=webpack:///./src/templateFunctions/newListForm.js?");
 
 /***/ }),
 
-/***/ "./src/sideBarListTemplate.js":
-/*!************************************!*\
-  !*** ./src/sideBarListTemplate.js ***!
-  \************************************/
+/***/ "./src/templateFunctions/newTaskTemplate.js":
+/*!**************************************************!*\
+  !*** ./src/templateFunctions/newTaskTemplate.js ***!
+  \**************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nfunction sideBarListTemplate(list) {\n  return /* template */ `\n  <p>${list.getName()}</p>\n`;\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (sideBarListTemplate);\n\n\n//# sourceURL=webpack:///./src/sideBarListTemplate.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nconst taskForm = /* template */ `\n  <div>\n    <label for=\"task-name\">Task</label>\n    <input id='task-name' type=\"text\" name='task-name'>\n  </div>\n\n  <div>\n    <label for=\"task-description\">Description</label>\n    <input id='task-description' type=\"text\" name='task-description'>\n  </div>\n\n  <button id='add-task'>Add Task</button>\n`;\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (taskForm);\n\n\n//# sourceURL=webpack:///./src/templateFunctions/newTaskTemplate.js?");
+
+/***/ }),
+
+/***/ "./src/templateFunctions/sideBarListTemplate.js":
+/*!******************************************************!*\
+  !*** ./src/templateFunctions/sideBarListTemplate.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nfunction sideBarListTemplate(list) {\n  return /* template */ `\n  <p>${list.getName()}</p>\n`;\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (sideBarListTemplate);\n\n\n//# sourceURL=webpack:///./src/templateFunctions/sideBarListTemplate.js?");
+
+/***/ }),
+
+/***/ "./src/templateFunctions/taskListTemplate.js":
+/*!***************************************************!*\
+  !*** ./src/templateFunctions/taskListTemplate.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nfunction taskList(task) {\n  return /* template */ `\n  <p>${task.name}</p>\n  <p>${task.description}</p>\n`;\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (taskList);\n\n\n//# sourceURL=webpack:///./src/templateFunctions/taskListTemplate.js?");
 
 /***/ })
 

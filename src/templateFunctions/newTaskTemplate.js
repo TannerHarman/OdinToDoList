@@ -9,7 +9,7 @@ const taskForm = /* template */ `
     <input id='task-description' type="text" name='task-description'>
   </div>
 
-  <button id='create-list'>Add Task</button>
+  <button id='add-task'>Add Task</button>
 `;
 
 export default taskForm;

@@ -8,9 +8,12 @@ const listForm = /* template */ `
     <input id='list-name' type="text" name='list-name'>
   </div>
 
+  <div id='tasks'></div>
+
   <div>
     ${taskForm}
   </div>
+
 
   <button id='create-list'>Save List</button>
   <button id='cancel-list'>Cancel</button>

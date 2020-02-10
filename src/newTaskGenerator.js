@@ -1,6 +1,6 @@
-function newTask(task, description) {
+function newTask(name, description) {
   return {
-    task,
+    name,
     description,
   };
 }
