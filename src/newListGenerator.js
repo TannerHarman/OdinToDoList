@@ -1,24 +1,24 @@
 function newList(nameInput = '') {
-  let listName = nameInput;
+  let name = nameInput;
   const tasks = [];
 
-  const getName = () => listName;
-
-  const getTasks = () => tasks;
-
   const setName = newName => {
-    listName = newName;
+    name = newName;
   };
 
   const addTasks = taskList => {
     tasks.push(taskList);
   };
 
+  const returnList = () => ({
+    name,
+    tasks,
+  });
+
   return {
-    getName,
-    getTasks,
     addTasks,
     setName,
+    returnList,
   };
 }
 

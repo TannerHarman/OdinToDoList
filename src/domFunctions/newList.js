@@ -4,14 +4,14 @@ import addListToSidebar from './addListToSidebar';
 import addTask from './addTask';
 import mainDisplayController from './mainDisplayController';
 
-function newList(listGenerator, taskGenerator) {
-  const newList = document.querySelector('#new-list');
+function newList(listGenerator, taskGenerator, masterList) {
+  const newListInput = document.querySelector('#new-list');
 
-  newList.addEventListener('click', () => {
+  newListInput.addEventListener('click', () => {
     const list = Object.seal(listGenerator());
     mainDisplayController(listForm);
 
-    addListToSidebar(list);
+    addListToSidebar(list, masterList);
     cancelList();
     addTask(list, taskGenerator);
   });

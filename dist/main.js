@@ -94,7 +94,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _templateFunctions_sideBarListTemplate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../templateFunctions/sideBarListTemplate */ \"./src/templateFunctions/sideBarListTemplate.js\");\n/* harmony import */ var _mainDisplayController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mainDisplayController */ \"./src/domFunctions/mainDisplayController.js\");\n\n\n\nfunction addListToSidebar(list) {\n  const createList = document.querySelector('#create-list');\n  const listNameInput = document.querySelector('#list-name');\n\n  createList.addEventListener('click', () => {\n    const lists = document.querySelector('#lists');\n    list.setName(listNameInput.value);\n    lists.innerHTML += Object(_templateFunctions_sideBarListTemplate__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(list);\n\n    Object(_mainDisplayController__WEBPACK_IMPORTED_MODULE_1__[\"default\"])('');\n  });\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (addListToSidebar);\n\n\n//# sourceURL=webpack:///./src/domFunctions/addListToSidebar.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _templateFunctions_sideBarListTemplate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../templateFunctions/sideBarListTemplate */ \"./src/templateFunctions/sideBarListTemplate.js\");\n/* harmony import */ var _mainDisplayController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mainDisplayController */ \"./src/domFunctions/mainDisplayController.js\");\n\n\n\nfunction addListToSidebar(list, masterList) {\n  const createList = document.querySelector('#create-list');\n  const listNameInput = document.querySelector('#list-name');\n  const listStorage = masterList;\n\n  createList.addEventListener('click', () => {\n    list.setName(listNameInput.value);\n    listStorage.push(list);\n    localStorage.setItem('lists', JSON.stringify(listStorage));\n\n    const lists = document.querySelector('#lists');\n    lists.innerHTML += Object(_templateFunctions_sideBarListTemplate__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(list);\n\n    Object(_mainDisplayController__WEBPACK_IMPORTED_MODULE_1__[\"default\"])('');\n  });\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (addListToSidebar);\n\n\n//# sourceURL=webpack:///./src/domFunctions/addListToSidebar.js?");
 
 /***/ }),
 
@@ -106,7 +106,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _tem
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _templateFunctions_taskListTemplate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../templateFunctions/taskListTemplate */ \"./src/templateFunctions/taskListTemplate.js\");\n\n\nfunction addTask(list, taskGenerator) {\n  const newTaskButton = document.querySelector('#add-task');\n  const tasks = document.querySelector('#tasks');\n\n  newTaskButton.addEventListener('click', () => {\n    const taskName = document.querySelector('#task-name');\n    const taskDescription = document.querySelector('#task-name');\n    const newTask = taskGenerator(taskName.value, taskDescription.value);\n\n    list.addTasks(newTask);\n    tasks.innerHTML += Object(_templateFunctions_taskListTemplate__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(newTask);\n\n    console.log(list.getTasks());\n  });\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (addTask);\n\n\n//# sourceURL=webpack:///./src/domFunctions/addTask.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _templateFunctions_taskListTemplate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../templateFunctions/taskListTemplate */ \"./src/templateFunctions/taskListTemplate.js\");\n\n\nfunction addTask(list, taskGenerator) {\n  const newTaskButton = document.querySelector('#add-task');\n  const tasks = document.querySelector('#tasks');\n\n  newTaskButton.addEventListener('click', () => {\n    const taskName = document.querySelector('#task-name');\n    const taskDescription = document.querySelector('#task-description');\n    const newTask = taskGenerator(taskName.value, taskDescription.value);\n\n    list.addTasks(newTask);\n    tasks.innerHTML += Object(_templateFunctions_taskListTemplate__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(newTask);\n  });\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (addTask);\n\n\n//# sourceURL=webpack:///./src/domFunctions/addTask.js?");
 
 /***/ }),
 
@@ -142,7 +142,7 @@ eval("__webpack_require__.r(__webpack_exports__);\nfunction mainDisplayControlle
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _templateFunctions_newListForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../templateFunctions/newListForm */ \"./src/templateFunctions/newListForm.js\");\n/* harmony import */ var _cancelList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cancelList */ \"./src/domFunctions/cancelList.js\");\n/* harmony import */ var _addListToSidebar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./addListToSidebar */ \"./src/domFunctions/addListToSidebar.js\");\n/* harmony import */ var _addTask__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./addTask */ \"./src/domFunctions/addTask.js\");\n/* harmony import */ var _mainDisplayController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./mainDisplayController */ \"./src/domFunctions/mainDisplayController.js\");\n\n\n\n\n\n\nfunction newList(listGenerator, taskGenerator) {\n  const newList = document.querySelector('#new-list');\n\n  newList.addEventListener('click', () => {\n    const list = Object.seal(listGenerator());\n    Object(_mainDisplayController__WEBPACK_IMPORTED_MODULE_4__[\"default\"])(_templateFunctions_newListForm__WEBPACK_IMPORTED_MODULE_0__[\"default\"]);\n\n    Object(_addListToSidebar__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(list);\n    Object(_cancelList__WEBPACK_IMPORTED_MODULE_1__[\"default\"])();\n    Object(_addTask__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(list, taskGenerator);\n  });\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (newList);\n\n\n//# sourceURL=webpack:///./src/domFunctions/newList.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _templateFunctions_newListForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../templateFunctions/newListForm */ \"./src/templateFunctions/newListForm.js\");\n/* harmony import */ var _cancelList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cancelList */ \"./src/domFunctions/cancelList.js\");\n/* harmony import */ var _addListToSidebar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./addListToSidebar */ \"./src/domFunctions/addListToSidebar.js\");\n/* harmony import */ var _addTask__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./addTask */ \"./src/domFunctions/addTask.js\");\n/* harmony import */ var _mainDisplayController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./mainDisplayController */ \"./src/domFunctions/mainDisplayController.js\");\n\n\n\n\n\n\nfunction newList(listGenerator, taskGenerator, masterList) {\n  const newListInput = document.querySelector('#new-list');\n\n  newListInput.addEventListener('click', () => {\n    const list = Object.seal(listGenerator());\n    Object(_mainDisplayController__WEBPACK_IMPORTED_MODULE_4__[\"default\"])(_templateFunctions_newListForm__WEBPACK_IMPORTED_MODULE_0__[\"default\"]);\n\n    Object(_addListToSidebar__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(list, masterList);\n    Object(_cancelList__WEBPACK_IMPORTED_MODULE_1__[\"default\"])();\n    Object(_addTask__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(list, taskGenerator);\n  });\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (newList);\n\n\n//# sourceURL=webpack:///./src/domFunctions/newList.js?");
 
 /***/ }),
 
@@ -154,7 +154,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _tem
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"guiModule\", function() { return guiModule; });\n/* harmony import */ var _domFunctions_newList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./domFunctions/newList */ \"./src/domFunctions/newList.js\");\n\n\nconst guiModule = function(listGenerator, taskGenerator) {\n  Object(_domFunctions_newList__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(listGenerator, taskGenerator);\n};\n\n\n\n\n//# sourceURL=webpack:///./src/gui.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"guiModule\", function() { return guiModule; });\n/* harmony import */ var _lists__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lists */ \"./src/lists.js\");\n/* harmony import */ var _domFunctions_newList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./domFunctions/newList */ \"./src/domFunctions/newList.js\");\n\n\n\nconst guiModule = function(listGenerator, taskGenerator) {\n  const defaultLists = [];\n\n  defaultLists.push(Object(_lists__WEBPACK_IMPORTED_MODULE_0__[\"default\"])().lists[0].returnList());\n  localStorage.setItem('lists', JSON.stringify(defaultLists));\n\n  console.log(defaultLists);\n\n  Object(_domFunctions_newList__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(listGenerator, taskGenerator, defaultLists);\n};\n\n\n\n\n//# sourceURL=webpack:///./src/gui.js?");
 
 /***/ }),
 
@@ -170,6 +170,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _new
 
 /***/ }),
 
+/***/ "./src/lists.js":
+/*!**********************!*\
+  !*** ./src/lists.js ***!
+  \**********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _newListGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./newListGenerator */ \"./src/newListGenerator.js\");\n/* harmony import */ var _newTaskGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./newTaskGenerator */ \"./src/newTaskGenerator.js\");\n\n\n\nfunction listStorage(list) {\n  const lists = [];\n\n  const defaultLists = () => {\n    const defaultTask = Object(_newTaskGenerator__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(\n      'Example Task',\n      'This is where you put a slight description on the task at hand'\n    );\n\n    const defaultList = Object(_newListGenerator__WEBPACK_IMPORTED_MODULE_0__[\"default\"])('Example List');\n    defaultList.addTasks(defaultTask);\n    lists.push(defaultList);\n  };\n\n  const addList = () => {\n    lists.push(list);\n  };\n\n  defaultLists();\n\n  return {\n    addList,\n    lists,\n  };\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (listStorage);\n\n\n//# sourceURL=webpack:///./src/lists.js?");
+
+/***/ }),
+
 /***/ "./src/newListGenerator.js":
 /*!*********************************!*\
   !*** ./src/newListGenerator.js ***!
@@ -178,7 +190,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _new
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nfunction newList(nameInput = '') {\n  let listName = nameInput;\n  const tasks = [];\n\n  const getName = () => listName;\n\n  const getTasks = () => tasks;\n\n  const setName = newName => {\n    listName = newName;\n  };\n\n  const addTasks = taskList => {\n    tasks.push(taskList);\n  };\n\n  return {\n    getName,\n    getTasks,\n    addTasks,\n    setName,\n  };\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (newList);\n\n\n//# sourceURL=webpack:///./src/newListGenerator.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nfunction newList(nameInput = '') {\n  let name = nameInput;\n  const tasks = [];\n\n  const setName = newName => {\n    name = newName;\n  };\n\n  const addTasks = taskList => {\n    tasks.push(taskList);\n  };\n\n  const returnList = () => ({\n    name,\n    tasks,\n  });\n\n  return {\n    addTasks,\n    setName,\n    returnList,\n  };\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (newList);\n\n\n//# sourceURL=webpack:///./src/newListGenerator.js?");
 
 /***/ }),
 
@@ -226,7 +238,7 @@ eval("__webpack_require__.r(__webpack_exports__);\nconst taskForm = /* template 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nfunction sideBarListTemplate(list) {\n  return /* template */ `\n  <p>${list.getName()}</p>\n`;\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (sideBarListTemplate);\n\n\n//# sourceURL=webpack:///./src/templateFunctions/sideBarListTemplate.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nfunction sideBarListTemplate(list) {\n  return /* template */ `\n  <p>${list.returnList().name}</p>\n`;\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (sideBarListTemplate);\n\n\n//# sourceURL=webpack:///./src/templateFunctions/sideBarListTemplate.js?");
 
 /***/ }),
 

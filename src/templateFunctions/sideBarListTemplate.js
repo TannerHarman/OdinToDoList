@@ -1,6 +1,6 @@
 function sideBarListTemplate(list) {
   return /* template */ `
-  <p>${list.getName()}</p>
+  <p>${list.returnList().name}</p>
 `;
 }
 
